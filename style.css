@@ -71,13 +71,15 @@ header h1 {
 
 @media (max-width: 600px) {
   .gallery {
-    column-count: 2;
-    column-gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
     padding: 1rem 1rem; /* more space on mobile edges */
+    column-count: unset;
   }
   
   .gallery img {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
   }
 }
 
