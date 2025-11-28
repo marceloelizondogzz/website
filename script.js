@@ -2,9 +2,10 @@
 // Add any new image filename here (in the gallery/ folder)
 const imageFiles = [
   "000000010005-2.jpg",
-  "A000324-R1-06-5.jpg",
   "000000010007-2.jpg",
+  "000000010021.jpg",
   "000000010023-2.jpg",
+  "A000324-R1-06-5.jpg",
   "A000324-R1-37-36.jpg",
   "A000325-R1-06-5A.jpg",
   "A000325-R1-30-29A.jpg",
@@ -15,6 +16,19 @@ const imageFiles = [
   "DSC08414.jpg"
 ];
 
+// Shuffle function to randomize photo order
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Shuffle the imageFiles array
+const shuffledImages = shuffleArray(imageFiles);
+
 const gallerySection = document.querySelector(".gallery");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-content");
@@ -23,7 +37,7 @@ const closeBtn = document.querySelector(".close");
 let currentIndex = 0;
 
 // Dynamically create gallery images
-imageFiles.forEach((filename, index) => {
+shuffledImages.forEach((filename, index) => {
   const img = document.createElement("img");
   img.src = `gallery/${filename}`;
   img.alt = `Photo ${index + 1}`;
