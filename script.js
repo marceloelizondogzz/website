@@ -2,9 +2,17 @@
 // Add any new image filename here (in the gallery/ folder)
 const imageFiles = [
   "000000010005-2.jpg",
+  "A000324-R1-06-5.jpg",
   "000000010007-2.jpg",
   "000000010023-2.jpg",
-  "A000324-R1-37-36.jpg" // Add new images here
+  "A000324-R1-37-36.jpg",
+  "A000325-R1-06-5A.jpg",
+  "A000325-R1-30-29A.jpg",
+  "DJI_20250628110637_0189_D.jpg",
+  "DJI_20250830113138_0257_D.jpg",
+  "DSC06326.jpg",
+  "DSC07410.jpg",
+  "DSC08414.jpg"
 ];
 
 const gallerySection = document.querySelector(".gallery");
