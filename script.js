@@ -1,8 +1,11 @@
 // --- GALLERY IMAGE FILES ---
 // Add any new image filename here (in the gallery/ folder)
 const imageFiles = [
+  "000000010003-2.jpg",
+  "000000010005-2-2.jpg",
   "000000010005-2.jpg",
   "000000010007-2.jpg",
+  "000000010012-2.jpg",
   "000000010021.jpg",
   "000000010023-2.jpg",
   "A000324-R1-06-5.jpg",
