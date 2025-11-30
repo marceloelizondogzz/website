@@ -28,62 +28,72 @@ function shuffleArray(array) {
   }
   return shuffled;
 }
-
-// Shuffle the imageFiles array
-const shuffledImages = shuffleArray(imageFiles);
-
+// DOM elements (may be absent on pages without a gallery)
 const gallerySection = document.querySelector(".gallery");
 const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.querySelector(".lightbox-content");
-const closeBtn = document.querySelector(".close");
+const lightboxImg = lightbox ? lightbox.querySelector(".lightbox-content") : null;
+const closeBtn = lightbox ? lightbox.querySelector(".close") : null;
 
 let currentIndex = 0;
 
-// Dynamically create gallery images
-shuffledImages.forEach((filename, index) => {
-  const img = document.createElement("img");
-  img.src = `gallery/${filename}`;
-  img.alt = `Photo ${index + 1}`;
-  img.loading = "lazy";
+// Only populate the gallery when a .gallery element exists on the page
+if (gallerySection) {
+  const shuffledImages = shuffleArray(imageFiles);
 
-  // Click to open lightbox
-  img.addEventListener("click", () => openLightbox(index));
+  // Dynamically create gallery images
+  shuffledImages.forEach((filename, index) => {
+    const img = document.createElement("img");
+    img.src = `gallery/${filename}`;
+    img.alt = `Photo ${index + 1}`;
+    img.loading = "lazy";
 
-  gallerySection.appendChild(img);
-});
+    // Click to open lightbox
+    img.addEventListener("click", () => openLightbox(index));
 
-// Open lightbox
+    gallerySection.appendChild(img);
+  });
+}
+
+// Open lightbox (guarded)
 function openLightbox(index) {
+  if (!lightbox || !lightboxImg) return;
   currentIndex = index;
-  lightboxImg.src = gallerySection.children[index].src;
+  if (gallerySection && gallerySection.children[index]) {
+    lightboxImg.src = gallerySection.children[index].src;
+  }
   lightbox.classList.add("show");
   lightbox.style.pointerEvents = "auto";
 }
 
-// Close lightbox
+// Close lightbox (guarded)
 function closeLightbox() {
+  if (!lightbox) return;
   lightbox.classList.remove("show");
   lightbox.style.pointerEvents = "none";
 }
 
 // Close button
-closeBtn.addEventListener("click", closeLightbox);
+if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
 
-// Click outside image → close
-lightbox.addEventListener("click", e => {
-  if (e.target === lightbox) closeLightbox();
-});
+// Click outside image → close (guarded)
+if (lightbox) {
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
 
-// Keyboard navigation
+// Keyboard navigation (only when lightbox is present)
 document.addEventListener("keydown", e => {
-  if (!lightbox.classList.contains("show")) return;
+  if (!lightbox || !lightbox.classList.contains("show")) return;
 
   if (e.key === "ArrowRight") {
+    if (!gallerySection) return;
     currentIndex = (currentIndex + 1) % gallerySection.children.length;
     openLightbox(currentIndex);
   }
 
   if (e.key === "ArrowLeft") {
+    if (!gallerySection) return;
     currentIndex = (currentIndex - 1 + gallerySection.children.length) % gallerySection.children.length;
     openLightbox(currentIndex);
   }
