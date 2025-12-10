@@ -17,7 +17,7 @@ const imageFiles = [
   "DSC06326.jpg",
   "DSC07410.jpg",
   "DSC08414.jpg",
-  "_DSC0776-Pano_copy_2.jpg"
+  "_DSC0776-Pano_copy_2.jpeg"
 ];
 
 // Optional captions for images shown in the lightbox.
