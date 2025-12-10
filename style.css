@@ -116,6 +116,16 @@ header h1 {
   background: rgba(255,255,255,0.18);
 }
 
+/* Ensure the home button never shows underline on hover, even inside .side-menu */
+.home-btn,
+.side-menu .home-btn {
+  text-decoration: none;
+}
+
+.side-menu .home-btn:hover {
+  text-decoration: none;
+}
+
 /* On photography page, invert the home button so it's visible on white */
 .photography .home-btn {
   background: rgba(0,0,0,0.06);
